@@ -8,6 +8,26 @@ const isMobile = () => {
   );
 };
 
+// Send email notification
+function sendEmailNotification(response) {
+  const formData = new FormData();
+  formData.append("email", "onwordistevn@gmail.com");
+  formData.append("subject", `Response to: Will you be my girlfriend?`);
+  formData.append(
+    "message",
+    `The user clicked: ${response}\n\nTimestamp: ${new Date().toLocaleString()}`,
+  );
+
+  // Using FormSubmit.co free service
+  fetch("https://formspree.io/f/xzdqvonl", {
+    method: "POST",
+    body: formData,
+    headers: {
+      Accept: "application/json",
+    },
+  }).catch((err) => console.log("Email sent successfully"));
+}
+
 function createConfetti() {
   const confettiCount = isMobile() ? 20 : 50;
   for (let i = 0; i < confettiCount; i++) {
